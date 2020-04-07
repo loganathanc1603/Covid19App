@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Panel width="auto" id="mPanlIndiaId" expand="onExpand" app:filterId="mPanlIndiaId" expanded="true" expandAnimation="true"
+		class="sapUiTinyMargin" expandable="true">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="{JModel>/NoofItemsIndia}" level="Auto"/>
+					<ToolbarSpacer/>
+					<SearchField liveChange="onLivChTable">
+						<layoutData><OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/></layoutData>
+					</SearchField>
+					<!--<Button icon="sap-icon://switch-views" press="onPrsSwap"/>-->
+					<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="handleSortButtonPressed"/>
+					<Button tooltip="Refresh" icon="sap-icon://refresh" press="onPrsBtnRefresh"/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<content>
+			<Table id="mTblCovid19Id" inset="false" growing="true" growingThreshold="100" class="sapUiNoMargin" alternateRowColors="true"
+				items="{ path: 'JModel>/StateData'}" sticky="ColumnHeaders" visible="true">
+				<columns>
+					<Column width="30%">
+						<Text text="Name of State / Union Territories"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Total Confirmed Cases"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Total Active Cases"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="Total Recoverd Cases"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Death Case"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+						<Text text="Last Updated"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press="onPrsNavTable">
+						<cells>
+							<ObjectIdentifier title="{JModel>state}"/>
+							<HBox>
+								<Text text="{JModel>confirmed}"/>
+								<Text class="ztodaysconfirmedcount" text="[+ {JModel>deltaconfirmed} ]" visible="{= ${JModel>deltaconfirmed} === '0' ? false : true }"/>
+							</HBox>
+							<ObjectNumber number="{JModel>active}" state="Warning"/>
+							<ObjectNumber number="{JModel>recovered}" state="Success"/>
+							<ObjectNumber number="{JModel>deaths}" state="Error"/>
+							<ObjectIdentifier text="{JModel>lastupdatedtime}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Panel>
+</core:FragmentDefinition>

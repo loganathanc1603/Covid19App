@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Dialog title="{JModel>/DistrictData/state}" state="Information" contentHeight="90%" contentWidth="60%" stretchOnPhone="true">
+		<l:Grid hSpacing="1" vSpacing="1" defaultSpan="XL4 L4 M6 S12">
+			<l:content>
+				<GenericTag text="Confirmed Cases" design="Full" status="Information" class="sapUiSmallMarginTop">
+					<ObjectNumber state="Information" emphasized="false" number="{JModel>/DistrictData/confirmed} [ {JModel>/DistrictData/deltaconfirmed} ]"/>
+				</GenericTag>
+				<GenericTag text="Active Cases" design="Full" status="Warning" class="sapUiSmallMarginTop">
+					<ObjectNumber state="Warning" emphasized="false" number="{JModel>/DistrictData/active}"/>
+				</GenericTag>
+				<GenericTag text="Recovered Cases" design="Full" status="Success" class="sapUiSmallMarginTop">
+					<ObjectNumber state="Success" emphasized="false" number="{JModel>/DistrictData/recovered} [ {JModel>/DistrictData/deltarecovered} ]"/>
+				</GenericTag>
+				<GenericTag text="Death Cases" design="Full" status="Error" class="sapUiSmallMarginTop">
+					<ObjectNumber state="Error" emphasized="false" number="{JModel>/DistrictData/deaths} [ {JModel>/DistrictData/deltadeaths} ]"/>
+				</GenericTag>
+			</l:content>
+		</l:Grid>
+		<Table id="mTblDistrictId" inset="false" alternateRowColors="true" class="sapUiSmallMarginTop"
+			items="{ path: 'JModel>/DistrictData/DistrictData'}">
+			<columns>
+				<Column>
+					<Text text="District"/>
+				</Column>
+				<Column hAlign="Center">
+					<Text text="Total Confirmed Cases"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<ObjectIdentifier title="{JModel>district}"/>
+						<ObjectStatus text="{JModel>confirmed}" state="Error"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<endButton>
+			<Button text="Close" icon="sap-icon://sys-back" type="Reject" press="onPrsClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

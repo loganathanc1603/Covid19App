@@ -1,0 +1,21 @@
+<mvc:View xmlns:core="sap.ui.core" controllerName="com.loga.covid19app.Covid19.controller.MainView" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="mPageId" title="{i18n>title}" busy="{JModel>/iBusy}" busyIndicatorDelay="{JModel>/iBusyDelay}">
+					<headerContent>
+						<Button icon="sap-icon://menu" tooltip="Menu" visible="false" press="onPrsBtnMenu"/>
+						<!--<Label text="Last Updated*: {JModel>/KeyValue/0/lastupdatedtime}" class="lastUpdated"/>-->
+					</headerContent>
+					<content>
+						<core:Fragment fragmentName="com.loga.covid19app.Covid19.fragments.HeaderView" type="XML"></core:Fragment>
+						<core:Fragment fragmentName="com.loga.covid19app.Covid19.fragments.IndiaView" type="XML"></core:Fragment>
+						<core:Fragment fragmentName="com.loga.covid19app.Covid19.fragments.OtherCountryView" type="XML"></core:Fragment>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

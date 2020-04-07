@@ -1,0 +1,13 @@
+{
+	"Title": {
+		"Title": "Useful Links"
+	},
+	"Help": [{
+		"Text": "COVID-19 Tracker",
+		"Url": "https://www.covid19india.org/"
+	}, {
+		"Text": "World Health Organization",
+		"Url": "https://www.who.int/"
+	}]
+
+}

@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "com.loga.covid19app.Covid19.Covid19",
+        "description": "COVID 19 Report",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#Covid19-Display",
+        "navigationComponentName": "com.loga.covid19app.Covid19",
+        "intentSemanticObject": "Covid19",
+        "intentAction": "Display",
+        "html5ApplicationName": "covid19",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "73e40bbc-5f80-4633-ba09-5399723b906f"
+        ],
+        "contentPackages": [
+            "6b2005b6-8015-42e1-8fe3-72e71a003bdf"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "COVID-19",
+        "subtitle": "Report",
+        "searchKeywords": "COVID-19,Report",
+        "displayIconUrl": "sap-icon://trip-report",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

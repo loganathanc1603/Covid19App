@@ -1,0 +1,10 @@
+/* Enter your custom styles here */
+
+.ztodaysconfirmedcount {
+    margin-left: 1rem;
+    color: #f50505 !important;
+}
+
+.lastUpdated {
+    color: #00802b !important;
+}

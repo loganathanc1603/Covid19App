@@ -1,0 +1,55 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<GenericTile headerImage="sap-icon://manager" press="onPrsTile" app:filterId="confirmed"
+		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Confirmed Cases">
+		<TileContent>
+			<NumericContent value="{JModel>/HeaderData/0/confirmed}" scale="[ {JModel>/HeaderData/0/deltaconfirmed} ]" indicator="Up"
+				valueColor="Neutral" withMargin="false"/>
+		</TileContent>
+	</GenericTile>
+	<GenericTile headerImage="sap-icon://activate" press="onPrsTile" app:filterId="active"
+		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Active Cases">
+		<TileContent>
+			<NumericContent value="{JModel>/HeaderData/0/active}" valueColor="Critical" withMargin="false"/>
+		</TileContent>
+	</GenericTile>
+	<GenericTile headerImage="sap-icon://leads" press="onPrsTile" app:filterId="recovered"
+		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Recovered Cases">
+		<TileContent>
+			<NumericContent value="{JModel>/HeaderData/0/recovered}" scale="[ {JModel>/HeaderData/0/deltarecovered} ]" indicator="Up" valueColor="Good"
+				withMargin="false"/>
+		</TileContent>
+	</GenericTile>
+	<GenericTile headerImage="sap-icon://employee-rejections" press="onPrsTile" app:filterId="deaths"
+		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Death Cases">
+		<TileContent>
+			<NumericContent value="{JModel>/HeaderData/0/deaths}" scale="[ {JModel>/HeaderData/0/deltadeaths} ]" indicator="Up" valueColor="Error"
+				withMargin="false"/>
+		</TileContent>
+	</GenericTile>
+	<SlideTile class="sapUiTinyMarginBegin sapUiTinyMarginTop">
+		<GenericTile backgroundImage="{JModel>/MyGovStayHomeImg}" frameType="TwoByOne" press="onPrsSlideTile" app:filterId="1">
+			<TileContent footer="April 03, 2020">
+				<NewsContent contentText="Stay Home, Stay Safe" subheader="#IndiaFightsCorona"/>
+			</TileContent>
+		</GenericTile>
+		<GenericTile backgroundImage="{JModel>/whoImg}" frameType="TwoByOne" press="onPrsSlideTile" app:filterId="2">
+			<TileContent footer="March 27, 2020">
+				<NewsContent contentText="WHO Health Alert brings COVID-19 facts to billions via WhatsApp"/>
+			</TileContent>
+		</GenericTile>
+		<GenericTile backgroundImage="{JModel>/MyGovIndImg}" frameType="TwoByOne" press="onPrsSlideTile" app:filterId="3">
+			<TileContent footer="April 03, 2020">
+				<NewsContent
+					contentText="Government of India is taking all necessary steps to ensure that we are prepared well to face the challenge and threat posed by the growing pandemic of COVID 19 – the Corona Virus."
+					subheader="#IndiaFightsCorona"/>
+			</TileContent>
+		</GenericTile>
+		<GenericTile backgroundImage="{JModel>/MyGovCovidTipsImg}" frameType="TwoByOne" press="onPrsSlideTile" app:filterId="4">
+			<TileContent footer="April 03, 2020">
+				<NewsContent
+					contentText="Government of India is taking all necessary steps to ensure that we are prepared well to face the challenge and threat posed by the growing pandemic of COVID 19 – the Corona Virus."
+					subheader="#IndiaFightsCorona"/>
+			</TileContent>
+		</GenericTile>
+	</SlideTile>
+</core:FragmentDefinition>

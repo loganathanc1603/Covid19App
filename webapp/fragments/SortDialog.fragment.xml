@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="States" key="state" selected="true" />
+			<ViewSettingsItem text="Confirmed Case" key="confirmed" />
+			<ViewSettingsItem text="Active Case" key="active" />
+			<ViewSettingsItem text="Recovered Cases" key="recovered" />
+			<ViewSettingsItem text="Deaths" key="deaths" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>
