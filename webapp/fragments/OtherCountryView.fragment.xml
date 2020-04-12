@@ -44,16 +44,16 @@
 					<Column>
 						<Text text="Country Name"/>
 					</Column>
-					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+					<Column hAlign="Center">
 						<Text text="Total Confirmed Cases"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="Today Cases"/>
 					</Column>
 					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="Total Active Cases"/>
 					</Column>
-					<Column hAlign="Center">
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="Total Recoverd Cases"/>
 					</Column>
 					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
