@@ -1,12 +1,11 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<ViewSettingsDialog confirm="onSortAllCountry">
 		<sortItems>
-			<ViewSettingsItem text="Country" key="country_name" selected="true"/>
+			<ViewSettingsItem text="Country" key="country" selected="true"/>
 			<ViewSettingsItem text="Confirmed Case" key="cases"/>
-			<ViewSettingsItem text="Active Case" key="active_cases"/>
-			<ViewSettingsItem text="Recovered Cases" key="total_recovered"/>
+			<ViewSettingsItem text="Active Case" key="active"/>
+			<ViewSettingsItem text="Recovered Cases" key="recovered"/>
 			<ViewSettingsItem text="Deaths" key="deaths"/>
-			<ViewSettingsItem text="New Deaths" key="new_deaths"/>
 		</sortItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>

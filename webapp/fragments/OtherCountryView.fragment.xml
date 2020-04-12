@@ -1,11 +1,35 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Panel width="auto" id="mPanlAllId" expand="onExpand" app:filterId="mPanlAllId" expanded="false" class="sapUiTinyMargin" expandable="true">
+		<GenericTile headerImage="sap-icon://manager" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Confirmed Cases">
+			<TileContent>
+				<NumericContent value="{path: 'covidAll>/cases', formatter: '.formatter.groupNumber'}" valueColor="Neutral" truncateValueTo="10"
+					formatterValue="true"/>
+			</TileContent>
+		</GenericTile>
+		<GenericTile headerImage="sap-icon://activate" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Active Cases">
+			<TileContent>
+				<NumericContent value="{path: 'covidAll>/active', formatter: '.formatter.groupNumber'}" valueColor="Critical" truncateValueTo="10"
+					formatterValue="true"/>
+			</TileContent>
+		</GenericTile>
+		<GenericTile headerImage="sap-icon://leads" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Recovered Cases">
+			<TileContent>
+				<NumericContent value="{path: 'covidAll>/recovered', formatter: '.formatter.groupNumber'}" valueColor="Good" truncateValueTo="10"
+					formatterValue="true"/>
+			</TileContent>
+		</GenericTile>
+		<GenericTile headerImage="sap-icon://employee-rejections" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Death Cases">
+			<TileContent>
+				<NumericContent value="{path: 'covidAll>/deaths', formatter: '.formatter.groupNumber'}" valueColor="Error" truncateValueTo="10"
+					formatterValue="true"/>
+			</TileContent>
+		</GenericTile>
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="{JModel>/otherCountryTotal}" level="Auto"/>
+					<Title text="{JModel>/otherCountryTotal}" tooltip="Rest of India" level="Auto"/>
 					<ToolbarSpacer/>
-					<SearchField liveChange="onLivOtrCntry">
+					<SearchField search="onLivOtrCntry">
 						<layoutData><OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/></layoutData>
 					</SearchField>
 					<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="onPrsSort"/>
@@ -15,40 +39,49 @@
 		</headerToolbar>
 		<content>
 			<Table id="mTblCovidOtherCtryId" inset="false" growing="true" growingThreshold="100" alternateRowColors="true"
-				items="{ path: 'JModel>/AllCountryData'}" class="sapUiNoMargin">
+				items="{ path: 'JModel>/AllCountryData'}" class="sapUiSmallMarginTop" sticky="ColumnHeaders,HeaderToolbar" popinLayout="Block">
 				<columns>
-					<Column width="30%">
+					<Column>
 						<Text text="Country Name"/>
 					</Column>
 					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="Total Confirmed Cases"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Today Cases"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="Total Active Cases"/>
 					</Column>
 					<Column hAlign="Center">
 						<Text text="Total Recoverd Cases"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="Death Case"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="New Deaths"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
-						<Text text="Serious Critical"/>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="Last Updated"/>
 					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
-							<ObjectIdentifier title="{JModel>country_name}"/>
-							<ObjectNumber number="{JModel>cases}"/>
-							<ObjectNumber number="{JModel>active_cases}" state="Warning"/>
-							<ObjectNumber number="{JModel>total_recovered}" state="Success"/>
-							<ObjectNumber number="{JModel>deaths}" state="Error"/>
-							<ObjectNumber number="{JModel>new_deaths}" state="Information"/>
-							<ObjectIdentifier text="{JModel>serious_critical}"/>
+							<FlexBox justifyContent="Start" alignItems="Start">
+								<items>
+									<Image visible="true" class="sapUiSmallMarginEnd" width="50px" height="32px" src="{JModel>countryInfo/flag}"/>
+									<ObjectIdentifier title="{JModel>country}"/>
+								</items>
+							</FlexBox>
+							<ObjectNumber number="{path:'JModel>cases', formatter: '.formatter.groupNumber'}"/>
+							<ObjectNumber number="{path:'JModel>todayCases', formatter: '.formatter.groupNumber'}"/>
+							<ObjectNumber number="{path:'JModel>active',formatter: '.formatter.groupNumber'}" state="Warning"/>
+							<ObjectNumber number="{path:'JModel>recovered',formatter: '.formatter.groupNumber'}" state="Success"/>
+							<ObjectNumber number="{path:'JModel>deaths',formatter: '.formatter.groupNumber'}" state="Error"/>
+							<ObjectNumber number="{path:'JModel>todayDeaths',formatter: '.formatter.groupNumber'}" state="Error"/>
+							<ObjectStatus text="{ path:'JModel>updated', formatter:'.formatter.convertDateFormat' }"/>
 						</cells>
 					</ColumnListItem>
 				</items>

@@ -6,18 +6,13 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/ui/Device",
 	"sap/ui/model/Sorter",
-	"com/loga/covid19app/Covid19/model/formatter",
-	'sap/viz/ui5/data/FlattenedDataset',
-	'sap/viz/ui5/format/ChartFormatter',
-	'sap/viz/ui5/api/env/Format'
-], function (Controller, JSONModel, Filter, FilterOperator, MessageBox, Device, Sorter, formatter, FlattenedDataset, ChartFormatter,
-	Format) {
+	"com/loga/covid19app/Covid19/model/formatter"
+], function (Controller, JSONModel, Filter, FilterOperator, MessageBox, Device, Sorter, formatter) {
 	"use strict";
 
 	return Controller.extend("com.loga.covid19app.Covid19.controller.MainView", {
 		formatter: formatter,
 		onInit: function () {
-			//	this.initChart();
 			this._mViewSettingsDialogs = {};
 			this.oRs = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
@@ -48,55 +43,29 @@ sap.ui.define([
 			this.fnFetchAllCountryData();
 		},
 
-		// initChart: function () {
-		// 	// Format.numericFormatter(ChartFormatter.getInstance());
-		// 	// var formatPattern = ChartFormatter.DefaultPattern;
-
-		// 	// var oVizFrame = this.oVizFrame = this.getView().byId("VizFrameIndiaId");
-		// 	// oVizFrame.setVizProperties({
-		// 	// 	plotArea: {
-		// 	// 		dataLabel: {
-		// 	// 			formatString: formatPattern.SHORTFLOAT_MFD2,
-		// 	// 			visible: true
-		// 	// 		}
-		// 	// 	},
-		// 	// 	valueAxis: {
-		// 	// 		label: {
-		// 	// 			formatString: formatPattern.SHORTFLOAT
-		// 	// 		},
-		// 	// 		title: {
-		// 	// 			visible: true
-		// 	// 		}
-		// 	// 	},
-		// 	// 	categoryAxis: {
-		// 	// 		title: {
-		// 	// 			visible: true
-		// 	// 		}
-		// 	// 	},
-		// 	// 	title: {
-		// 	// 		visible: true,
-		// 	// 		text: 'COVID 19 Report'
-		// 	// 	}
-		// 	// });
-		// },
-
 		fnFetchAllCountryData: function () {
 			this.JModel.setProperty("/iBusy", true);
+			// var settings = {
+			// 	"async": true,
+			// 	"crossDomain": true,
+			// 	"url": "https://corona-virus-world-and-india-data.p.rapidapi.com/api",
+			// 	"method": "GET",
+			// 	"headers": {
+			// 		"x-rapidapi-host": "corona-virus-world-and-india-data.p.rapidapi.com",
+			// 		"x-rapidapi-key": "zkF95Q3Q99msh1YUMHbIe1uJfNmWp1Mzye0jsn8pNosOa8C15B"
+			// 	}
+			// };
 			var settings = {
-				"async": true,
-				"crossDomain": true,
-				"url": "https://corona-virus-world-and-india-data.p.rapidapi.com/api",
-				"method": "GET",
-				"headers": {
-					"x-rapidapi-host": "corona-virus-world-and-india-data.p.rapidapi.com",
-					"x-rapidapi-key": "zkF95Q3Q99msh1YUMHbIe1uJfNmWp1Mzye0jsn8pNosOa8C15B"
-				}
+				url: this.oRs.getText("allCountryUrl"),
+				type: "GET",
+				dataType: "json"
 			};
 
 			$.ajax(settings).done(function (response) {
 				this.JModel.setProperty("/iBusy", false);
-				this.JModel.setProperty("/AllCountryData", response.countries_stat);
-				var oC = this.oRs.getText("otherCountryTotal", [response.countries_stat.length]);
+				var data = this.SortValue(response, "cases", "desc")
+				this.JModel.setProperty("/AllCountryData", data);
+				var oC = this.oRs.getText("otherCountryTotal", [response.length]);
 				this.JModel.setProperty("/otherCountryTotal", oC);
 			}.bind(this)).fail(function (err) {
 				this.JModel.setProperty("/iBusy", false);
@@ -137,15 +106,9 @@ sap.ui.define([
 				dataType: "json",
 				success: function (data) {
 					this.JModel.setProperty("/iBusy", false);
-
-					filterData = this.SortValue(filterData, "state", "asc");
+					// filterData = this.SortValue(filterData, "state", "asc");
 					filterData = this.ConvertValues(filterData);
-
-					// var t = new JSONModel({
-					// 	StateData: filterData
-					// });
-					// this.getView().setModel(t);
-					data = this.SortValue(data, "state", "asc");
+					// data = this.SortValue(data, "state", "asc");
 					for (var i = 0; i < data.length; i++) {
 						for (var j = 0; j < filterData.length; j++) {
 							if (data[i].state === filterData[j].state) {
@@ -288,12 +251,8 @@ sap.ui.define([
 			var aFilters = [];
 			var sQuery = oEvent.getSource().getValue();
 			if (sQuery && sQuery.length > 0) {
-				var f1 = new Filter("country_name", FilterOperator.Contains, sQuery),
-					f2 = new Filter("cases", FilterOperator.Contains, sQuery),
-					f3 = new Filter("active_cases", FilterOperator.Contains, sQuery),
-					f4 = new Filter("total_recovered", FilterOperator.Contains, sQuery),
-					f5 = new Filter("deaths", FilterOperator.Contains, sQuery);
-				aFilters.push(new Filter([f1, f2, f3, f4, f5], false));
+				var f1 = new Filter("country", FilterOperator.Contains, sQuery);
+				aFilters.push(f1);
 			}
 
 			// update list binding
@@ -325,6 +284,7 @@ sap.ui.define([
 		},
 
 		onExpand: function (evt) {
+			this.JModel.setProperty("iBusy", true);
 			var sId = evt.getSource().data("filterId"),
 				exp = evt.getSource().getExpanded();
 			if (sId === "mPanlIndiaId" && exp === false) {
@@ -336,6 +296,7 @@ sap.ui.define([
 			} else if (sId === "mPanlAllId" && exp === true) {
 				this.byId("mPanlIndiaId").setExpanded(false);
 			}
+			this.JModel.setProperty("iBusy", false);
 		},
 
 		onPrsSlideTile: function (evt) {
@@ -360,10 +321,6 @@ sap.ui.define([
 				this.byId("mTblCovid19Id").setVisible(true);
 				this.byId("VizFrameIndiaId").setVisible(false);
 			}
-		},
-
-		onPrsClr: function (evt) {
-			var t = evt;
 		}
 	});
 });

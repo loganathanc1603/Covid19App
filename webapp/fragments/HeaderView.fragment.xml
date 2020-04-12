@@ -1,29 +1,27 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<GenericTile headerImage="sap-icon://manager" press="onPrsTile" app:filterId="confirmed"
-		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Confirmed Cases">
+	<GenericTile headerImage="sap-icon://manager" press="onPrsTile" app:filterId="confirmed" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+		header="Confirmed Cases">
 		<TileContent>
-			<NumericContent value="{JModel>/HeaderData/0/confirmed}" scale="[ {JModel>/HeaderData/0/deltaconfirmed} ]" indicator="Up"
-				valueColor="Neutral" withMargin="false"/>
+			<NumericContent value="{path:'JModel>/HeaderData/0/confirmed', formatter:'.formatter.groupNumber'}" valueColor="Neutral"
+				formatterValue="true" truncateValueTo="10"/>
 		</TileContent>
 	</GenericTile>
-	<GenericTile headerImage="sap-icon://activate" press="onPrsTile" app:filterId="active"
-		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Active Cases">
+	<GenericTile headerImage="sap-icon://activate" press="onPrsTile" app:filterId="active" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+		header="Active Cases">
 		<TileContent>
-			<NumericContent value="{JModel>/HeaderData/0/active}" valueColor="Critical" withMargin="false"/>
+			<NumericContent value="{path:'JModel>/HeaderData/0/active', formatter:'.formatter.groupNumber'}" valueColor="Critical" formatterValue="true" truncateValueTo="10"/>
 		</TileContent>
 	</GenericTile>
-	<GenericTile headerImage="sap-icon://leads" press="onPrsTile" app:filterId="recovered"
-		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Recovered Cases">
+	<GenericTile headerImage="sap-icon://leads" press="onPrsTile" app:filterId="recovered" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+		header="Recovered Cases">
 		<TileContent>
-			<NumericContent value="{JModel>/HeaderData/0/recovered}" scale="[ {JModel>/HeaderData/0/deltarecovered} ]" indicator="Up" valueColor="Good"
-				withMargin="false"/>
+			<NumericContent value="{path:'JModel>/HeaderData/0/recovered', formatter:'.formatter.groupNumber'}" valueColor="Good" formatterValue="true" truncateValueTo="10"/>
 		</TileContent>
 	</GenericTile>
 	<GenericTile headerImage="sap-icon://employee-rejections" press="onPrsTile" app:filterId="deaths"
-		class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Death Cases">
+		class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Death Cases">
 		<TileContent>
-			<NumericContent value="{JModel>/HeaderData/0/deaths}" scale="[ {JModel>/HeaderData/0/deltadeaths} ]" indicator="Up" valueColor="Error"
-				withMargin="false"/>
+			<NumericContent value="{path:'JModel>/HeaderData/0/deaths', formatter:'.formatter.groupNumber'}" valueColor="Error" formatterValue="true" truncateValueTo="10"/>
 		</TileContent>
 	</GenericTile>
 	<SlideTile class="sapUiTinyMarginBegin sapUiTinyMarginTop">

@@ -3,12 +3,13 @@
 	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Panel width="auto" id="mPanlIndiaId" expand="onExpand" app:filterId="mPanlIndiaId" expanded="true" expandAnimation="true"
 		class="sapUiTinyMargin" expandable="true">
+		<core:Fragment fragmentName="com.loga.covid19app.Covid19.fragments.HeaderView" type="XML"></core:Fragment>
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
 					<Title text="{JModel>/NoofItemsIndia}" level="Auto"/>
 					<ToolbarSpacer/>
-					<SearchField liveChange="onLivChTable">
+					<SearchField search="onLivChTable">
 						<layoutData><OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/></layoutData>
 					</SearchField>
 					<!--<Button icon="sap-icon://switch-views" press="onPrsSwap"/>-->
@@ -18,7 +19,7 @@
 			</OverflowToolbar>
 		</headerToolbar>
 		<content>
-			<Table id="mTblCovid19Id" inset="false" growing="true" growingThreshold="100" class="sapUiNoMargin" alternateRowColors="true"
+			<Table id="mTblCovid19Id" class="sapUiSmallMarginTop" inset="false" growing="true" growingThreshold="100" alternateRowColors="true"
 				items="{ path: 'JModel>/StateData'}" sticky="ColumnHeaders" visible="true">
 				<columns>
 					<Column width="30%">
@@ -30,7 +31,7 @@
 					<Column hAlign="Center">
 						<Text text="Total Active Cases"/>
 					</Column>
-					<Column minScreenWidth="Tablet" demandPopin="true">
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
 						<Text text="Total Recoverd Cases"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
