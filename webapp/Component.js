@@ -22,7 +22,7 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
 
 			//api endpoint to fetch worldwide data from
-			var sUrl = "https://corona.lmao.ninja/all";
+			var sUrl = "https://corona.lmao.ninja/v2/all";
 			this.setModel(models.createCovidAllModel(sUrl), "covidAll");
 		}
 	});
